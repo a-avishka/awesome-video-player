@@ -1,0 +1,85 @@
+.button{
+    -fx-background-color:transparent;
+    -fx-background-size:25 25;
+    -fx-background-repeat:no-repeat;
+    -fx-background-position:center;
+}
+
+.button:hover{
+-fx-background-color:#0099FF;
+}
+
+#body{
+-fx-background-color:black;
+}
+
+
+#openbtn{
+-fx-background-image:url("fold.png");
+}
+
+#playbtn{
+-fx-background-image:url("play.png");
+}
+
+#pausebtn{
+-fx-background-image:url("pause.png");
+}
+
+#stopbtn{
+-fx-background-image:url("stop.png");
+}
+
+
+#previousbtn{
+-fx-background-image:url("prev.png");
+}
+
+
+#slowerbtn{
+-fx-background-image:url("slow.png");
+}
+
+
+
+#fasterbtn{
+-fx-background-image:url("fast.png");
+}
+
+
+
+#nextbtn{
+-fx-background-image:url("next.png");
+}
+
+#exitbtn{
+-fx-background-image:url("exit.png");
+
+}
+
+
+#ctrlPane{
+-fx-opacity:0;
+}
+
+#vbox{
+-fx-background-color:#E8E8E8;
+-fx-opacity:0;
+
+}
+
+#vbox:hover{
+-fx-opacity:1;
+}
+
+
+#seekSlider .track {
+    -fx-pref-height:12;
+}
+
+#seekSlider .thumb {
+    -fx-pref-height: 25;
+    -fx-pref-width: 10;
+    -fx-background-color:black;
+
+}

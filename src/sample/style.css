@@ -18,17 +18,27 @@
 -fx-background-image:url("fold.png");
 }
 
+
+
+
+
 #playbtn{
 -fx-background-image:url("play.png");
 }
+
+
 
 #pausebtn{
 -fx-background-image:url("pause.png");
 }
 
+
+
 #stopbtn{
 -fx-background-image:url("stop.png");
 }
+
+
 
 
 #previousbtn{
@@ -36,9 +46,12 @@
 }
 
 
+
 #slowerbtn{
 -fx-background-image:url("slow.png");
 }
+
+
 
 
 
@@ -48,14 +61,29 @@
 
 
 
+
+
 #nextbtn{
 -fx-background-image:url("next.png");
 }
+
+
+
+
+
+
+#contbtn{
+-fx-background-image:url("image.png");
+}
+
+
 
 #exitbtn{
 -fx-background-image:url("exit.png");
 
 }
+
+
 
 
 #ctrlPane{
@@ -64,14 +92,19 @@
 
 #vbox{
 -fx-background-color:#E8E8E8;
--fx-opacity:0;
+-fx-opacity:1;
 
+}
+
+
+
+#vbox:fullscreen{
+-fx-opacity:0;
 }
 
 #vbox:hover{
 -fx-opacity:1;
 }
-
 
 #seekSlider .track {
     -fx-pref-height:12;

@@ -18,20 +18,20 @@ The last 2 icons are special ones, press the last button (on left to volume slid
 
 
 ## Tips
- 	1.   	TAB          	-  Choose folder
+ 		1.   	TAB          	-  Choose folder
 		2.   	Single-Click 	-  Pause/play
 		3.   	ENTER        	-  Pause/play
 		3.   	Double-Click 	-  Fullscreen
 		3.   	SHIFT        	-  Fullscreen
-		4. 	  ESC       	   -  Exit fullscreen 
+		4. 	ESC       	-  Exit fullscreen 
 		5.   	Q            	-  Save & Quit
 		6.   	W            	-  Continue last watched
-		7.	   , (COMMA)    	-  Play previous
-		8.	   . (PERIOD)   	-  Play next
+		7.	, (COMMA)    	-  Play previous
+		8.	. (PERIOD)   	-  Play next
 		9.   	Z            	-  Reduce playback speed
-		10.  	X 		          -  Increase playback speed
-  11.   N             -  Skip forward
-  12.   M             -  Skip back
+		10.  	X 		-  Increase playback speed
+  		11.   	N             	-  Skip forward
+ 		12.   	M             	-  Skip back
 
  
 

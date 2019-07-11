@@ -49,10 +49,11 @@ public class Controller implements Initializable {
     private String path;
     private int mediaCounter;
     private ArrayList<File> fileCollector = new ArrayList<>();
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer = null;
     private double speedRate = 1.0;
 
     public boolean clickPause = false;
+    public boolean fullScrCheck = false;
 
     @FXML
     private MediaView mediaView;
@@ -141,14 +142,45 @@ public class Controller implements Initializable {
         }
     }
 
+    private void before(){
+        mediaPlayer.pause();
+
+
+        if (mediaCounter > 0) {
+
+            try {
+                mediaCounter--;
+                playFile(fileCollector.get(mediaCounter));
+
+            } catch (Exception er) {
+//                System.out.println("This is the first video");
+            }
+
+        } else {
+            Main.getStage().setTitle("This is the first file.No videos before this.");
+
+        }
+    }
+
     @FXML
     private void faster(ActionEvent e) {        //increase playback speed button
         speedRate += 0.5;
         mediaPlayer.setRate(speedRate);
     }
 
+    private void faster() {        //increase playback speed button
+        speedRate += 0.5;
+        mediaPlayer.setRate(speedRate);
+    }
+
+
     @FXML
     private void slower(ActionEvent e) {        //decrease playback speed button
+        speedRate -= 0.5;
+        mediaPlayer.setRate(speedRate);
+    }
+
+    private void slower() {        //decrease playback speed button
         speedRate -= 0.5;
         mediaPlayer.setRate(speedRate);
     }
@@ -173,10 +205,35 @@ public class Controller implements Initializable {
     }
 
 
+    private void next() {      //view next video button
+        mediaPlayer.pause();
+
+
+        if (mediaCounter < (fileCollector.size() - 1)) {
+            try {
+
+                mediaCounter++;
+                playFile(fileCollector.get(mediaCounter));
+
+            } catch (Exception er) {
+//                System.out.println("This is the last video");
+            }
+        } else {
+            Main.getStage().setTitle("This is the last file.No more videos after this.");
+        }
+    }
+
     @FXML
     private void contLast(ActionEvent e) {
 
+        try {
+            mediaPlayer.pause();
+        } catch (Exception ex) {
+//            System.out.println("problem");
+        }
 
+
+        fileCollector.clear();
 
         mediaCounter = Integer.parseInt(Objects.requireNonNull(stateReader("stateFile1.txt")));
 
@@ -186,21 +243,54 @@ public class Controller implements Initializable {
 
         for (String strPath : str) {
 
-            strPath+=".mp4";
+            strPath += ".mp4";
             File newFile = new File(strPath);
 //            fileCollector.clear();
             fileCollector.add(newFile);
         }
 
 
+        clickPause = false;
 
 
 //        System.out.println(fileCollector.get(mediaCounter).getPath());
         playFile(fileCollector.get(mediaCounter));
 
 
+    }
 
 
+    private void contLast() {
+
+        try {
+            mediaPlayer.pause();
+        } catch (Exception ex) {
+//            System.out.println("problem");
+        }
+
+
+        fileCollector.clear();
+
+        mediaCounter = Integer.parseInt(Objects.requireNonNull(stateReader("stateFile1.txt")));
+
+
+        String[] str = stateReader("stateFile2.txt").split(".mp4, ");
+
+
+        for (String strPath : str) {
+
+            strPath += ".mp4";
+            File newFile = new File(strPath);
+//            fileCollector.clear();
+            fileCollector.add(newFile);
+        }
+
+
+        clickPause = false;
+
+
+//        System.out.println(fileCollector.get(mediaCounter).getPath());
+        playFile(fileCollector.get(mediaCounter));
 
 
     }
@@ -216,28 +306,103 @@ public class Controller implements Initializable {
     }
 
 
+    private void exit() throws IOException {      //exit button
+
+
+        stateWriter("stateFile1.txt", mediaCounter);
+        stateWriter("stateFile2.txt", fileCollector);
+
+        System.exit(0);
+    }
+
+
     @FXML
     private void buttonOpenFolder(ActionEvent event) {      //locate folder button
 
+        fileCollector.clear();
+
+
+        try {
+            mediaPlayer.pause();
+
+        } catch (Exception ex) {
+//            System.out.println("problem");
+            clickPause = true;
+        }
 
 
         DirectoryChooser directoryChooser = new DirectoryChooser();         //gets the folder we select and assigns the path the filePath variable.
         directoryChooser.getInitialDirectory();
         File selectedDir = directoryChooser.showDialog(null);
-        filePath = selectedDir.toString();
+
+        try {
+            filePath = selectedDir.toString();
+
 //        System.out.println(filePath);
 
 
-        fileLister(filePath);       //this function finds all the videos in the given folder path.....Read more about this below.
-        mediaCounter = 0;
-        playFile(fileCollector.get(mediaCounter));      //plays the first video from the list.....Read more about this below.
+            fileLister(filePath);       //this function finds all the videos in the given folder path.....Read more about this below.
+            mediaCounter = 0;
+            playFile(fileCollector.get(mediaCounter));      //plays the first video from the list.....Read more about this below.
 
 
 //        System.out.println("Has a total of " + fileCollector.size() + " videos.");
 
-
+        } catch (Exception e) {
+            try {
+                mediaPlayer.pause();
+            } catch (Exception ex) {
+//                System.out.println("problem");
+            }
+        }
 
     }
+
+
+
+    private void buttonOpenFolder() {      //locate folder button
+
+        fileCollector.clear();
+
+
+        try {
+            mediaPlayer.pause();
+
+        } catch (Exception ex) {
+//            System.out.println("problem");
+            clickPause = true;
+        }
+
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();         //gets the folder we select and assigns the path the filePath variable.
+        directoryChooser.getInitialDirectory();
+        File selectedDir = directoryChooser.showDialog(null);
+
+        try {
+            filePath = selectedDir.toString();
+
+//        System.out.println(filePath);
+
+
+            fileLister(filePath);       //this function finds all the videos in the given folder path.....Read more about this below.
+            mediaCounter = 0;
+            playFile(fileCollector.get(mediaCounter));      //plays the first video from the list.....Read more about this below.
+
+
+//        System.out.println("Has a total of " + fileCollector.size() + " videos.");
+
+        } catch (Exception e) {
+            try {
+                mediaPlayer.pause();
+            } catch (Exception ex) {
+//                System.out.println("problem");
+            }
+        }
+
+    }
+
+
+
 
 
     //This function adds all video in the chosen directory to an array.
@@ -279,7 +444,6 @@ public class Controller implements Initializable {
         }
 
 
-
     }
 
 
@@ -295,7 +459,6 @@ public class Controller implements Initializable {
         Media media = new Media(i.toURI().toString());          //Initiates the mediaPlayer
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
-
 
 
         DoubleProperty width = mediaView.fitWidthProperty();        //Stretches the video vertically and horizontally to fit window height
@@ -430,8 +593,6 @@ public class Controller implements Initializable {
     }
 
 
-
-
     public PseudoClass onFullScr = PseudoClass.getPseudoClass("fullscreen");
 
 
@@ -489,7 +650,7 @@ public class Controller implements Initializable {
 
 
         mediaView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            boolean fullScrCheck = false;
+
 
             @Override
             public void handle(MouseEvent event) {
@@ -499,11 +660,14 @@ public class Controller implements Initializable {
 
                 } else if (event.getClickCount() == 1) {
                     clickPause = (!clickPause);
+                    try {
+                        if (clickPause == true) {
+                            mediaPlayer.pause();
+                        } else {
+                            mediaPlayer.play();
+                        }
 
-                    if (clickPause == true) {
-                        mediaPlayer.pause();
-                    } else {
-                        mediaPlayer.play();
+                    } catch (Exception e) {
                     }
                 }
 
@@ -511,30 +675,96 @@ public class Controller implements Initializable {
         });
 
 
+//        contbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//
+//
+//            @Override
+//            public void handle(MouseEvent event) {
+//                if (event.getClickCount() == 1) {
+//
+//
+//                }
+//
+//            }
+//        });
+//
+//        openbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//
+//
+//            @Override
+//            public void handle(MouseEvent event) {
+//                if (event.getClickCount() == 1) {
+//                    clickPause = false;
+//                    if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)){
+//                        mediaPlayer.pause();
+//                    }
+//                }
+//
+//            }
+//        });
+
+
     }
 
 
-    public void keyhandler(KeyEvent event){
-        if((event.getCode()).equals(KeyCode.ENTER) ){
-            clickPause = (!clickPause);
+    public void keyhandler(KeyEvent event) {
 
-            if (clickPause == true) {
-                mediaPlayer.pause();
-            } else {
-                mediaPlayer.play();
+        try {
+            if ((event.getCode()).equals(KeyCode.ENTER)) {
+                clickPause = (!clickPause);
+
+                if (clickPause == true) {
+                    mediaPlayer.pause();
+                } else {
+                    mediaPlayer.play();
+                }
+
             }
 
+            if ((event.getCode()).equals(KeyCode.ESCAPE)) {
+                fullScrCheck = (!fullScrCheck);
+                vbox.pseudoClassStateChanged(onFullScr, fullScrCheck);
+            }
+
+            if ((event.getCode()).equals(KeyCode.SHIFT)) {
+                fullScrCheck = (!fullScrCheck);
+                vbox.pseudoClassStateChanged(onFullScr, fullScrCheck);
+            }
+
+            if ((event.getCode()).equals(KeyCode.COMMA)) {
+                before();
+            }
+
+            if ((event.getCode()).equals(KeyCode.PERIOD)) {
+                next();
+            }
+
+            if ((event.getCode()).equals(KeyCode.Z)) {
+                slower();
+            }
+
+            if ((event.getCode()).equals(KeyCode.X)) {
+                faster();
+            }
+
+            if ((event.getCode()).equals(KeyCode.TAB)) {
+                buttonOpenFolder();
+            }
+
+            if ((event.getCode()).equals(KeyCode.Q)) {
+                exit();
+            }
+
+            if ((event.getCode()).equals(KeyCode.W)) {
+                contLast();
+            }
+
+
+
+        } catch (Exception e) {
         }
 
-
     }
-
-
-
-
-
-
-
 
 
 }

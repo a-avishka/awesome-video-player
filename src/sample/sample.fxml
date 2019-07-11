@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="body" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="404.0" minWidth="-Infinity" onKeyPressed="#keyhandler" prefHeight="404.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <center>
@@ -22,18 +23,29 @@
    <bottom>
       <VBox fx:id="vbox" alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Slider fx:id="seekSlider" prefHeight="25.0" prefWidth="600.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-            </Slider>
-            <HBox fx:id="hbox" alignment="BOTTOM_CENTER" prefHeight="39.0" prefWidth="600.0">
+            <HBox alignment="TOP_CENTER" prefHeight="100.0">
+               <children>
+                  <Button fx:id="backward" mnemonicParsing="false" onAction="#backward" text="-">
+                     <font>
+                        <Font name="Constantia Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Slider fx:id="seekSlider" prefWidth="100000.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Slider>
+                  <Button fx:id="forward" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#forward" text="+">
+                     <font>
+                        <Font name="Corbel Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox fx:id="hbox" alignment="BOTTOM_CENTER">
                <children>
                   <Label fx:id="currentTime" minWidth="40.0" text="        ">
                      <HBox.margin>

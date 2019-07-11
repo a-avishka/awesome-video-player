@@ -81,6 +81,10 @@ public class Controller implements Initializable {
     private Button contbtn;
     @FXML
     private Button exitbtn;
+    @FXML
+    private Button backward;
+    @FXML
+    private Button forward;
 
 
     @FXML
@@ -103,7 +107,7 @@ public class Controller implements Initializable {
     private void pause(ActionEvent e) {      //pause button
 
         mediaPlayer.pause();
-        clickPause = (!clickPause);
+        clickPause = true;
     }
 
     @FXML
@@ -111,8 +115,8 @@ public class Controller implements Initializable {
 
         mediaPlayer.play();
         titleSetter(mediaCounter);
-        clickPause = (!clickPause);
-//        System.out.println(mediaPlayer.getStatus());
+        clickPause = false;
+
     }
 
     @FXML
@@ -142,7 +146,7 @@ public class Controller implements Initializable {
         }
     }
 
-    private void before(){
+    private void before() {
         mediaPlayer.pause();
 
 
@@ -257,6 +261,54 @@ public class Controller implements Initializable {
         playFile(fileCollector.get(mediaCounter));
 
 
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                startPlace();
+            }
+        });
+
+
+    }
+
+
+    private void startPlace() {
+        mediaPlayer.seek(Duration.seconds(Integer.parseInt(Objects.requireNonNull(stateReader("stateFile3.txt")))));
+
+
+        seekSlider.setMin(0.0);
+        seekSlider.setValue(0.0);
+        seekSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
+
+        mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                seekSlider.setValue(newValue.toSeconds());
+
+
+//                        duration.setText(String.format("%.2f",(newValue.toSeconds()))+" / "+String.format("%.2f",(mediaPlayer.getTotalDuration().toSeconds())));
+
+                double mediaDur = mediaPlayer.getTotalDuration().toSeconds();
+
+                currentTime.setText(displayTime(newValue.toSeconds()));
+
+                duration.setText(displayTime(mediaDur));
+
+
+            }
+
+        });
+
+        //allows the user to click on the slider and seek to that time on video
+
+//        seekSlider.setValue(mediaPlayer.getVolume()*100);
+        seekSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mediaPlayer.seek(Duration.seconds(seekSlider.getValue()));
+//                        System.out.println(seekSlider.get);
+            }
+        });
     }
 
 
@@ -293,6 +345,13 @@ public class Controller implements Initializable {
         playFile(fileCollector.get(mediaCounter));
 
 
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                startPlace();
+            }
+        });
+
     }
 
     @FXML
@@ -301,6 +360,7 @@ public class Controller implements Initializable {
 
         stateWriter("stateFile1.txt", mediaCounter);
         stateWriter("stateFile2.txt", fileCollector);
+        stateWriter("stateFile3.txt", (int) seekSlider.getValue());
 
         System.exit(0);
     }
@@ -311,6 +371,7 @@ public class Controller implements Initializable {
 
         stateWriter("stateFile1.txt", mediaCounter);
         stateWriter("stateFile2.txt", fileCollector);
+        stateWriter("stateFile3.txt", (int) seekSlider.getValue());
 
         System.exit(0);
     }
@@ -359,7 +420,6 @@ public class Controller implements Initializable {
     }
 
 
-
     private void buttonOpenFolder() {      //locate folder button
 
         fileCollector.clear();
@@ -402,7 +462,29 @@ public class Controller implements Initializable {
     }
 
 
+    public void forward(ActionEvent e) {
+        double time = mediaPlayer.getCurrentTime().toSeconds() + ((mediaPlayer.getTotalDuration().toSeconds()) * 0.01);
+        mediaPlayer.seek(Duration.seconds(time));
 
+    }
+
+    public void backward(ActionEvent e) {
+        double time = mediaPlayer.getCurrentTime().toSeconds() - ((mediaPlayer.getTotalDuration().toSeconds()) * 0.01);
+        mediaPlayer.seek(Duration.seconds(time));
+
+    }
+
+    public void forward() {
+        double time = mediaPlayer.getCurrentTime().toSeconds() + ((mediaPlayer.getTotalDuration().toSeconds()) * 0.01);
+        mediaPlayer.seek(Duration.seconds(time));
+
+    }
+
+    public void backward() {
+        double time = mediaPlayer.getCurrentTime().toSeconds() - ((mediaPlayer.getTotalDuration().toSeconds()) * 0.01);
+        mediaPlayer.seek(Duration.seconds(time));
+
+    }
 
 
     //This function adds all video in the chosen directory to an array.
@@ -648,6 +730,14 @@ public class Controller implements Initializable {
         exittt.setText("Save & exit");
         exitbtn.setTooltip(exittt);
 
+        final Tooltip fortt = new Tooltip();
+        fortt.setText("Skip forward");
+        forward.setTooltip(fortt);
+
+        final Tooltip backtt = new Tooltip();
+        backtt.setText("Skip back");
+        backward.setTooltip(backtt);
+
 
         mediaView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -722,8 +812,8 @@ public class Controller implements Initializable {
             }
 
             if ((event.getCode()).equals(KeyCode.ESCAPE)) {
-                fullScrCheck = (!fullScrCheck);
-                vbox.pseudoClassStateChanged(onFullScr, fullScrCheck);
+
+                vbox.pseudoClassStateChanged(onFullScr, false);
             }
 
             if ((event.getCode()).equals(KeyCode.SHIFT)) {
@@ -759,6 +849,13 @@ public class Controller implements Initializable {
                 contLast();
             }
 
+            if ((event.getCode()).equals(KeyCode.N)) {
+                backward();
+            }
+
+            if ((event.getCode()).equals(KeyCode.M)) {
+                forward();
+            }
 
 
         } catch (Exception e) {

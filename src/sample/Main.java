@@ -22,7 +22,7 @@ public class Main extends Application {
 
 
     private static Stage stage;
-
+    public boolean fullScr = false;
 
 
 
@@ -38,7 +38,7 @@ public class Main extends Application {
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 
-            boolean fullScr = false;
+
 
 
             @Override
@@ -55,6 +55,16 @@ public class Main extends Application {
 
         });
 
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if((event.getCode()).equals(KeyCode.SHIFT)) {
+                    fullScr = (!fullScr);
+                    primaryStage.setFullScreen(fullScr);
+                }
+            }
+        });
+
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -66,6 +76,8 @@ public class Main extends Application {
                 k.consume();
             }
         });
+
+
 
     }
 

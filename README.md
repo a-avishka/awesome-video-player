@@ -20,8 +20,8 @@ The last 2 icons are special ones, press the last button (on left to volume slid
  		1.   	TAB          	-  Choose folder
 		2.   	Single-Click 	-  Pause/play
 		3.   	ENTER        	-  Pause/play
-		3.   	Double-Click 	-  Fullscreen
-		3.   	SHIFT        	-  Fullscreen
+		3.   	Double-Click 	-  Fullscreen/Exit fullscreen
+		3.   	SHIFT        	-  Fullscreen/Exit fullscreen
 		4. 	ESC       	-  Exit fullscreen 
 		5.   	Q            	-  Save & Quit
 		6.   	W            	-  Continue last watched

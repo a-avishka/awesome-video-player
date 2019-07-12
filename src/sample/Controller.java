@@ -8,38 +8,27 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static javax.xml.stream.XMLStreamConstants.SPACE;
+
 
 
 public class Controller implements Initializable {
@@ -52,15 +41,15 @@ public class Controller implements Initializable {
     private MediaPlayer mediaPlayer = null;
     private double speedRate = 1.0;
 
-    public boolean clickPause = false;
-    public boolean fullScrCheck = false;
+    private boolean clickPause = false;
+    private boolean fullScrCheck = false;
+
+
 
     @FXML
     private MediaView mediaView;
-
     @FXML
     private Label duration;
-
     @FXML
     private Button openbtn;
     @FXML
@@ -85,23 +74,21 @@ public class Controller implements Initializable {
     private Button backward;
     @FXML
     private Button forward;
-
-
     @FXML
     private VBox vbox;
-
-    @FXML
-    private BorderPane body;
-
-
     @FXML
     private Label currentTime;
-
     @FXML
     private Slider volumeSlider;
-
     @FXML
     private Slider seekSlider;
+
+
+
+
+
+
+
 
     @FXML
     private void pause(ActionEvent e) {      //pause button
@@ -109,6 +96,7 @@ public class Controller implements Initializable {
         mediaPlayer.pause();
         clickPause = true;
     }
+
 
     @FXML
     private void play(ActionEvent e) {    //play button
@@ -281,12 +269,33 @@ public class Controller implements Initializable {
         seekSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
 
         mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+
+            boolean isMouse = false;
+
             @Override
             public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-                seekSlider.setValue(newValue.toSeconds());
 
 
-//                        duration.setText(String.format("%.2f",(newValue.toSeconds()))+" / "+String.format("%.2f",(mediaPlayer.getTotalDuration().toSeconds())));
+                seekSlider.setOnMousePressed(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        mediaPlayer.seek(Duration.seconds(seekSlider.getValue()));
+                        isMouse = true;
+                    }
+
+                });
+
+                if (isMouse == false) {
+                    seekSlider.setValue(newValue.toSeconds());
+                }
+
+                seekSlider.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        isMouse=false;
+                    }
+                });
+
 
                 double mediaDur = mediaPlayer.getTotalDuration().toSeconds();
 
@@ -295,20 +304,10 @@ public class Controller implements Initializable {
                 duration.setText(displayTime(mediaDur));
 
 
-            }
 
-        });
-
-        //allows the user to click on the slider and seek to that time on video
-
-//        seekSlider.setValue(mediaPlayer.getVolume()*100);
-        seekSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                mediaPlayer.seek(Duration.seconds(seekSlider.getValue()));
-//                        System.out.println(seekSlider.get);
             }
         });
+
     }
 
 
@@ -575,12 +574,34 @@ public class Controller implements Initializable {
                 seekSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
 
                 mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+
+                    boolean isMouse = false;
+
                     @Override
                     public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-                        seekSlider.setValue(newValue.toSeconds());
 
 
-//                        duration.setText(String.format("%.2f",(newValue.toSeconds()))+" / "+String.format("%.2f",(mediaPlayer.getTotalDuration().toSeconds())));
+                        seekSlider.setOnMousePressed(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                mediaPlayer.seek(Duration.seconds(seekSlider.getValue()));
+                                isMouse = true;
+                            }
+
+                        });
+
+
+                        if (isMouse == false) {
+                            seekSlider.setValue(newValue.toSeconds());
+                        }
+
+                        seekSlider.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                isMouse=false;
+                            }
+                        });
+
 
                         double mediaDur = mediaPlayer.getTotalDuration().toSeconds();
 
@@ -588,20 +609,11 @@ public class Controller implements Initializable {
 
                         duration.setText(displayTime(mediaDur));
 
+
+
                     }
                 });
 
-
-                //allows the user to click on the slider and seek to that time on video
-
-//        seekSlider.setValue(mediaPlayer.getVolume()*100);
-                seekSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        mediaPlayer.seek(Duration.seconds(seekSlider.getValue()));
-//                        System.out.println(seekSlider.get);
-                    }
-                });
 
             }
         });
@@ -763,36 +775,6 @@ public class Controller implements Initializable {
 
             }
         });
-
-
-//        contbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//
-//
-//            @Override
-//            public void handle(MouseEvent event) {
-//                if (event.getClickCount() == 1) {
-//
-//
-//                }
-//
-//            }
-//        });
-//
-//        openbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//
-//
-//            @Override
-//            public void handle(MouseEvent event) {
-//                if (event.getClickCount() == 1) {
-//                    clickPause = false;
-//                    if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)){
-//                        mediaPlayer.pause();
-//                    }
-//                }
-//
-//            }
-//        });
-
 
     }
 

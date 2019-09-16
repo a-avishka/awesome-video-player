@@ -4,9 +4,6 @@
 ![enter image description here](https://lh3.googleusercontent.com/mOHw3fXSfPfhK6Y7p9_DmputT4iGfO2Q3w8FKIFSZ9QklZGOZEwaEej_RDNIb8xkmLZD6JCY5g0 "VideoPlayer Image 1")
 
 
-![enter image description here](https://lh3.googleusercontent.com/euCpVlbARL0OalqC2fDn3HwIa8ylVvxxoz-PihVglezaKZxVcybF5VgRAywVODy-G6q37YecVXA "VideoPlayer Image 2")
-
-
 ![enter image description here](https://lh3.googleusercontent.com/WvTp0nh9sUloVz4ZBVcWJyqRTJqBpvQmR47NzDgTLp9QxrcLIL451WNffJs97lGDypr7WNPglPc "VideoPlayer Image 3")
 
 
@@ -38,13 +35,13 @@ The last 2 icons are special ones, press the last button (on left to volume slid
 		3.   	ENTER        	-  Pause/play
 		4.   	Double-Click 	-  Fullscreen/Exit fullscreen
 		5.   	SHIFT        	-  Fullscreen/Exit fullscreen
-		6.      ESC       	    -  Exit fullscreen 
+		6.      ESC       	-  Exit fullscreen 
 		7.   	Q            	-  Save & Quit
 		8.   	W            	-  Continue last watched
-		7. 	    , (COMMA)    	-  Play previous
-		9.	    . (PERIOD)   	-  Play next
+		7. 	, (COMMA)    	-  Play previous
+		9.	. (PERIOD)   	-  Play next
 		10.  	Z            	-  Reduce playback speed
-		11.  	X 		        -  Increase playback speed
+		11.  	X 		-  Increase playback speed
   		11.  	N            	-  Skip forward
  		12.  	M            	-  Skip back
 

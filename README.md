@@ -1,9 +1,25 @@
 # Video-Player
+
+
+![enter image description here](https://lh3.googleusercontent.com/mOHw3fXSfPfhK6Y7p9_DmputT4iGfO2Q3w8FKIFSZ9QklZGOZEwaEej_RDNIb8xkmLZD6JCY5g0 "VideoPlayer Image 1")
+
+
+![enter image description here](https://lh3.googleusercontent.com/euCpVlbARL0OalqC2fDn3HwIa8ylVvxxoz-PihVglezaKZxVcybF5VgRAywVODy-G6q37YecVXA "VideoPlayer Image 2")
+
+
+![enter image description here](https://lh3.googleusercontent.com/WvTp0nh9sUloVz4ZBVcWJyqRTJqBpvQmR47NzDgTLp9QxrcLIL451WNffJs97lGDypr7WNPglPc "VideoPlayer Image 3")
+
+
+
+
 A video player built from Java and JavaFX which when a folder is chosen plays all the videos in the folder and the ones in sub-folders inside that chosen folder in alphabetical order or in numerical order and this player can also hibernate during a video so you can continue where you left-off later.
 
 ## Whats special about this player
 1. Allows you to play all videos even the ones in sub-folder in a main folder in order.
 2. Allows you to hibernate and start from where you left earlier.
+3. Contains all the great features a modern video-player has.
+
+
 
 ## How to install 
 Extract the compressed (.7z) archive and move the extracted folder to C:\Program Files. Then go inside the folder and set .exe application to always run as admin, you can do this right-clicking on the .exe file -- Properties -- Compatibility -- Then check the Run as an administrator checkbox. Now you are good to go. To make things further easier create a shortcut of the .exe file and paste it somewhere its easy for you.
@@ -20,15 +36,15 @@ The last 2 icons are special ones, press the last button (on left to volume slid
  		1.   	TAB          	-  Choose folder
 		2.   	Single-Click 	-  Pause/play
 		3.   	ENTER        	-  Pause/play
-		3.   	Double-Click 	-  Fullscreen/Exit fullscreen
-		3.   	SHIFT        	-  Fullscreen/Exit fullscreen
-		4. 	ESC       	-  Exit fullscreen 
-		5.   	Q            	-  Save & Quit
-		6.   	W            	-  Continue last watched
-		7.	, (COMMA)    	-  Play previous
-		8.	. (PERIOD)   	-  Play next
-		9.   	Z            	-  Reduce playback speed
-		10.  	X 		-  Increase playback speed
+		4.   	Double-Click 	-  Fullscreen/Exit fullscreen
+		5.   	SHIFT        	-  Fullscreen/Exit fullscreen
+		6.      ESC       	    -  Exit fullscreen 
+		7.   	Q            	-  Save & Quit
+		8.   	W            	-  Continue last watched
+		7. 	    , (COMMA)    	-  Play previous
+		9.	    . (PERIOD)   	-  Play next
+		10.  	Z            	-  Reduce playback speed
+		11.  	X 		        -  Increase playback speed
   		11.  	N            	-  Skip forward
  		12.  	M            	-  Skip back
 

@@ -4,7 +4,6 @@
 
 
 
-
 A video player built from Java and JavaFX which when a folder is chosen plays all the videos in the folder and the ones in sub-folders inside that chosen folder in alphabetical order or in numerical order and this player can also hibernate during a video so you can continue where you left-off later.
 
 ## Whats special about this player

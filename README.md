@@ -1,10 +1,6 @@
 # Video-Player
 
-
-![enter image description here](https://lh3.googleusercontent.com/mOHw3fXSfPfhK6Y7p9_DmputT4iGfO2Q3w8FKIFSZ9QklZGOZEwaEej_RDNIb8xkmLZD6JCY5g0 "VideoPlayer Image 1")
-
-
-![enter image description here](https://lh3.googleusercontent.com/WvTp0nh9sUloVz4ZBVcWJyqRTJqBpvQmR47NzDgTLp9QxrcLIL451WNffJs97lGDypr7WNPglPc "VideoPlayer Image 3")
+[![Video player](https://res.cloudinary.com/marcomontalbano/image/upload/v1590516138/video_to_markdown/images/google-drive--1RWUv9nm6bVutB3kQ93rLWen39vvcMjRc-4834888bcd2b4555e72811f2a6951e10.jpg)](https://drive.google.com/open?id=1RWUv9nm6bVutB3kQ93rLWen39vvcMjRc "Video player")
 
 
 
